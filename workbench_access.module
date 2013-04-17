@@ -391,6 +391,11 @@ function workbench_access_node_access($node, $op, $account) {
     return NODE_ACCESS_IGNORE;
   }
 
+  // Create step.
+  // Allow everyone to create a new project 
+  if ($op == 'create' && $type == 'drupal_projects') {
+    return NODE_ACCESS_IGNORE;
+  }
   // Load the current scheme.
   workbench_access_load_include(variable_get('workbench_access'));
   // Get the access rules for this node.
