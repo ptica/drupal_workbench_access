@@ -417,17 +417,35 @@ function workbench_access_user_form($form, &$form_state, $account) {
     // Do we show inactive sections here?
     if (isset($active['active'][$section['access_id']])) {
       if (user_access('assign workbench access') && !empty($active['active'][$section['access_id']])) {
+        // ptacek: adding link to my-content view
+        $project_tid = $section['access_id'];
+        $project_name = check_plain($section['name']);
+        $admin_link = array(
+            '#type' => 'link',
+            '#href' => 'admin/my-content/' . $project_tid,
+            '#title' => $project_name,
+        );
+        $admin_link = $section['depth'] == 0 ? $project_name : drupal_render($admin_link);
         $form['sections'][$parent][$section['access_id']] = array(
           '#type' => 'checkbox',
-          '#title' => ($section['depth'] == 0 ? t('All of') . ' ' : '') . str_repeat('-', $section['depth']) . ' ' . check_plain($section['name']),
+          '#title' => ($section['depth'] == 0 ? t('All of') . ' ' : '') . str_repeat('-', $section['depth']) . ' ' . $admin_link,
           '#default_value' => isset($sections[$section['access_id']]),
           # '#disabled' => empty($sections[$section['access_id']]),
         );
       }
       elseif (isset($sections[$section['access_id']])) {
+        // ptacek: adding link to my-content view
+        $project_tid = $section['access_id'];
+        $project_name = check_plain($section['name']);
+        $admin_link = array(
+          '#type' => 'link',
+          '#href' => 'admin/my-content/' . $project_tid,
+          '#title' => $project_name,
+        );
+        $admin_link = $section['depth'] == 0 ? $project_name : drupal_render($admin_link);
         $form['sections'][$parent][$section['access_id']] = array(
           '#type' => 'markup',
-          '#markup' => ($section['depth'] == 0 ? t('All of') . ' ' : '') . str_repeat('-', $section['depth']) . ' ' . check_plain($section['name']) . '<br />',
+          '#markup' => ($section['depth'] == 0 ? t('All of') . ' ' : '') . str_repeat('-', $section['depth']) . ' ' . $admin_link . '<br />',
         );
       }
       /* Unused. Here for reference.

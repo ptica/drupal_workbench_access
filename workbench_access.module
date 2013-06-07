@@ -22,7 +22,7 @@ function workbench_access_menu() {
   $items['workbench_access/autocomplete/%/%'] = array(
     'page callback' => 'workbench_access_autocomplete',
     'page arguments' => array(2, 3),
-    'access arguments' => array('assign workbench access'),
+    'access callback' => 'workbench_access_autocomplete_access',
     'type' => MENU_CALLBACK,
     'file' => 'workbench_access.pages.inc',
   );
@@ -197,6 +197,15 @@ function workbench_access_assign_user($account) {
   }
   return FALSE;
 }
+/**
+ * Access callback for autocompletion
+ */
+function workbench_access_autocomplete_access() {
+  if (user_access('assign workbench access') || user_access('assign workbench subaccess')) {
+    return TRUE;
+  }
+  return FALSE;
+}
 
 /**
  * Implements hook_permission().
@@ -208,6 +217,9 @@ function workbench_access_permission() {
     ),
     'assign workbench access' => array(
       'title' => t('Assign users to Workbench Access sections'),
+    ),
+    'assign workbench subaccess' => array(
+      'title' => t('Assign users to OWN Workbench Access sections'),
     ),
     'access workbench access by role' => array(
       'title' => t('Allow all members of this role to be assigned to Workbench Access sections'),

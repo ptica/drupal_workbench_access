@@ -8,6 +8,7 @@
  */
 
 class workbench_access_handler_filter_access extends views_handler_filter_many_to_one {
+  function admin_summary() {}
   function init(&$view, &$options) {
     parent::init($view, $options);
     $this->value = array($options['access_id']);
