@@ -719,7 +719,8 @@ function theme_workbench_access_editor_form($variables) {
   $scheme = $form['workbench_access']['#value'];
   $access_info = workbench_access_load_access_info($scheme);
   $output = '<h2>' . t('%name editors by account', array('%name' => $access_info['name'])) . '</h2>';
-  $output .= '<p>' . t('Active editors for the %section section, as assigned by account. <a href="!url">View editors by role</a>.', array('%section' => $access_info['name'], '!url' => url('admin/config/workbench/access/roles/' . $scheme['access_type'] . '/' . $scheme['access_id'])));
+  // commenting out, as 'assign workbench subaccess' permission is not implemented for view by role
+  //$output .= '<p>' . t('Active editors for the %section section, as assigned by account. <a href="!url">View editors by role</a>.', array('%section' => $access_info['name'], '!url' => url('admin/config/workbench/access/roles/' . $scheme['access_type'] . '/' . $scheme['access_id'])));
   $header = array(t('Editor'), t('Actions'));
   $rows = array();
   foreach (element_children($form['users']) as $key) {
