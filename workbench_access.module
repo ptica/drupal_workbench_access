@@ -411,6 +411,15 @@ function workbench_access_node_access($node, $op, $account) {
   if ($op == 'create' && $type == 'personal_profile') {
   	return NODE_ACCESS_IGNORE;
   }
+  if ($op == 'create' && $type == 'ufal_tool') {
+  	return NODE_ACCESS_IGNORE;
+  }
+  if ($op == 'create' && $type == 'ufal_course') {
+  	return NODE_ACCESS_IGNORE;
+  }
+  if ($op == 'create' && $type == 'ufal_grant') {
+  	return NODE_ACCESS_IGNORE;
+  }
   // Load the current scheme.
   workbench_access_load_include(variable_get('workbench_access'));
   // Get the access rules for this node.

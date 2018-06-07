@@ -246,7 +246,7 @@ function workbench_access_save_field_elements($types) {
     $fields = workbench_access_get_available_fields($type);
     foreach ($fields as $field => $info) {
       $instance = $info['instance_info'];
-      $instance['workbench_access_field'] = (int) !empty($settings[$field]);
+      $instance['workbench_access_field'] = ($field == $settings);
       field_update_instance($instance);
     }
   }
